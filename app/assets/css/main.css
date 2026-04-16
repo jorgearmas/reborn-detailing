@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-bg:        #0d0d0d;
+  --color-surface:   #1a1a1a;
+  --color-red:       #cc2222;
+  --color-red-hover: #e03030;
+  --color-text:      #f0f0f0;
+  --color-muted:     #888888;
+  --color-border:    #2a2a2a;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: 'Inter', sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
