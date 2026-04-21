@@ -1,8 +1,8 @@
 <template>
   <div>
     <AppNavbar />
-    <main>
-      <HeroSection />
+    <main class="pt-24">
+      <AboutSection />
     </main>
     <AppFooter />
   </div>
@@ -11,5 +11,5 @@
 <script setup>
 import AppNavbar from '../components/ui/AppNavbar.vue'
 import AppFooter from '../components/ui/AppFooter.vue'
-import HeroSection from '../components/sections/HeroSection.vue'
+import AboutSection from '../components/sections/AboutSection.vue'
 </script>
