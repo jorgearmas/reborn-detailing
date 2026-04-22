@@ -1,7 +1,7 @@
 <template>
   <footer class="bg-[#1a1a1a] border-t border-[#2a2a2a] py-10">
     <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
-      <img src="/rebornlogo.jpg" alt="Reborn Detailing Studio" class="h-10" />
+      <img src="/rebornlogo.png" alt="Reborn Detailing Studio" class="h-10" />
 
       <p class="text-[#888888] text-sm">
         © {{ new Date().getFullYear() }} Reborn Detailing Studio. Todos los derechos reservados.
