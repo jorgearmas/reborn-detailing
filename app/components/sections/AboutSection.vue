@@ -14,7 +14,7 @@
 
       <div ref="image" class="relative">
         <div class="border border-[#2a2a2a] rounded-lg overflow-hidden">
-          <img src="/rebornlogo.jpg" alt="Reborn Detailing Studio" class="w-full object-cover" />
+          <img src="/rebornlogo.png" alt="Reborn Detailing Studio" class="w-full object-cover" />
         </div>
         <div class="absolute -bottom-4 -left-4 border border-[#cc2222] rounded-lg w-full h-full -z-10"></div>
       </div>
