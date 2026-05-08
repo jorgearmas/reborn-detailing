@@ -1,10 +1,10 @@
 <template>
-  <div class="border border-[#2a2a2a] rounded-lg p-8 bg-[#1a1a1a] hover:border-[#cc2222] transition-all duration-300 group">
-    <div class="text-[#cc2222] mb-4">
+  <div class="bg-[#cc2222] rounded-lg p-8 flex flex-col items-start gap-4 h-full">
+    <div class="text-black">
       <slot name="icon" />
     </div>
-    <h3 class="text-white font-semibold text-xl mb-3">{{ title }}</h3>
-    <p class="text-[#888888] text-sm leading-relaxed">{{ description }}</p>
+    <h3 class="text-white font-bold text-xl">{{ title }}</h3>
+    <p class="text-white/80 text-sm leading-relaxed">{{ description }}</p>
   </div>
 </template>
 
