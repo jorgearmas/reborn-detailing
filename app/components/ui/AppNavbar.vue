@@ -29,13 +29,22 @@
         </transition>
       </div>
 
-      <!-- Logo centrado -->
-      <a href="/" class="absolute left-1/2 -translate-x-1/2">
-        <img src="/rebornlogo.png" alt="Reborn Detailing Studio" class="w-64 object-contain" />
-      </a>
+      <!-- Logo centrado — desaparece al hacer scroll -->
+      <transition name="fade">
+        <a v-if="!scrolled" href="/" class="absolute left-1/2 -translate-x-1/2">
+          <img src="/rebornlogo.png" alt="Reborn Detailing Studio" class="w-64 object-contain" />
+        </a>
+      </transition>
 
-      <!-- Spacer derecho para balancear -->
-      <div class="w-10"></div>
+      <!-- Casita derecha — aparece al hacer scroll -->
+      <transition name="fade">
+        <a v-if="scrolled" href="/" class="flex items-center justify-center w-10 h-10 rounded-full bg-[#1a1a1a] border border-[#2a2a2a] hover:border-[#cc2222] transition-all duration-300">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f0f0f0" stroke-width="1.5">
+            <path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/>
+            <path d="M9 21V12h6v9"/>
+          </svg>
+        </a>
+      </transition>
 
     </div>
   </nav>
@@ -43,14 +52,20 @@
 
 <script setup>
 const menuOpen = ref(false)
+const scrolled = ref(false)
+
+onMounted(() => {
+  window.addEventListener('scroll', () => {
+    scrolled.value = window.scrollY > 80
+  })
+})
 </script>
 
 <style scoped>
 .fade-enter-active, .fade-leave-active {
-  transition: opacity 0.2s ease, transform 0.2s ease;
+  transition: opacity 0.4s ease;
 }
 .fade-enter-from, .fade-leave-to {
   opacity: 0;
-  transform: translateY(-8px);
 }
 </style>

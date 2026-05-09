@@ -1,5 +1,5 @@
 <template>
-  <section id="contacto" class="py-24 px-6">
+  <section id="contacto" class="py-24 px-6 bg-[#0d0d0d]">
     <div class="max-w-2xl mx-auto">
       <div class="text-center mb-16">
         <p class="text-[#cc2222] text-sm font-semibold tracking-[4px] uppercase mb-4">Escribinos</p>

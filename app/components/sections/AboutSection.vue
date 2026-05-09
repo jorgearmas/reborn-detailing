@@ -1,5 +1,5 @@
 <template>
-  <section id="nosotros" class="py-24 px-6">
+  <section id="nosotros" class="py-24 px-6 bg-white">
     <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
       <div ref="text">
         <p class="text-[#cc2222] text-sm font-semibold tracking-[4px] uppercase mb-4">Quiénes somos</p>

@@ -21,3 +21,19 @@ body {
 html {
   scroll-behavior: smooth;
 }
+
+#servicios {
+  background: linear-gradient(to bottom, #0d0d0d);
+}
+
+#galeria {
+  background: linear-gradient(to bottom, #0d0d0d, #cc2222);
+}
+
+#nosotros {
+  background: linear-gradient(to bottom, #cc2222, #0d0d0d);
+}
+
+#contacto {
+  background: linear-gradient(to bottom, #0d0d0d);
+}

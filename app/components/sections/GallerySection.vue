@@ -1,5 +1,5 @@
 <template>
-  <section id="galeria" class="py-24 px-6">
+  <section id="galeria" class="py-24 px-6 bg-[#cc2222]">
     <div class="max-w-6xl mx-auto">
       <div ref="header" class="text-center mb-16">
         <p class="text-[#cc2222] text-sm font-semibold tracking-[4px] uppercase mb-4">Nuestro trabajo</p>
