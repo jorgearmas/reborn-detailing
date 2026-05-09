@@ -2,9 +2,17 @@
   <div class="flip-card h-64 cursor-pointer">
     <div class="flip-card-inner">
       <!-- Frente -->
-      <div class="flip-card-front bg-[#cc2222] rounded-lg p-8 flex flex-col items-center justify-center gap-4 border border-black">
-        <slot name="icon" />
-        <h3 class="text-white font-bold text-xl text-center">{{ title }}</h3>
+      <div class="flip-card-front rounded-lg border border-black overflow-hidden relative">
+        <video
+          autoplay muted loop playsinline
+          class="absolute inset-0 w-full h-full object-cover"
+          :src="video"
+        ></video>
+        <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+        <div class="relative z-10 h-full flex flex-col items-center justify-center gap-4 p-8">
+          <slot name="icon" />
+          <h3 class="text-white font-bold text-xl text-center">{{ title }}</h3>
+        </div>
       </div>
 
       <!-- Reverso -->
@@ -20,6 +28,7 @@
 defineProps({
   title: String,
   description: String,
+  video: String,
 })
 </script>
 
