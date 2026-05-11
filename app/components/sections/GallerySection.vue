@@ -6,11 +6,11 @@
         <h2 class="text-4xl md:text-5xl font-bold text-white">Portafolio</h2>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div v-for="(item, index) in portfolio" :key="index" class="rounded-lg overflow-hidden">
           <p class="text-white font-bold text-lg tracking-widest uppercase mb-3">{{ item.label }}</p>
           <div
-            class="relative h-64 select-none overflow-hidden rounded-lg cursor-col-resize"
+            class="relative h-96 select-none overflow-hidden rounded-lg cursor-col-resize"
             @mousedown="startDrag($event, index)"
             @mousemove="onDrag($event, index)"
             @mouseup="stopDrag"
@@ -53,9 +53,10 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 gsap.registerPlugin(ScrollTrigger)
 
 const portfolio = [
-  { label: 'Corsa', before: '/gallery/Corsa-Dirty.png', after: '/gallery/Corsa-Clean.png' },
-  { label: 'RAV4', before: '/gallery/RAV-Dirty.png', after: '/gallery/RAV-Clean.png' },
-  { label: 'Corolla', before: '/gallery/Corolla-Dirty.png', after: '/gallery/Corolla-Clean.png' },
+  { label: 'VW', before: '/gallery/vw_good.jpg', after: '/gallery/vw_bad.jpg' },
+  { label: 'Mercedes', before: '/gallery/mercedes_dirty.jpg', after: '/gallery/mercedes_clean.jpg' },
+  { label: 'LC', before: '/gallery/lc_dirty.jpg', after: '/gallery/lc_clean.jpg' },
+  { label: 'BMW', before: '/gallery/BMW_good.jpg', after: '/gallery/BMW_bad.jpg' },
 ]
 
 const sliders = ref([50, 50, 50])
