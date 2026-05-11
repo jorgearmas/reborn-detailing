@@ -6,54 +6,39 @@
         <h2 class="text-4xl md:text-5xl font-bold text-white">Portafolio</h2>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div>
-          <p class="text-[#cc2222] text-xs font-semibold tracking-[4px] uppercase mb-2">Antes</p>
-          <img
-            :src="portfolio[activeIndex].thumbnail"
-            :alt="portfolio[activeIndex].label + ' antes'"
-            class="w-full rounded-lg object-cover"
-          />
-        </div>
-        <div>
-          <p class="text-[#cc2222] text-xs font-semibold tracking-[4px] uppercase mb-2">Después</p>
-          <img
-            :src="portfolio[activeIndex].thumbnailAfter"
-            :alt="portfolio[activeIndex].label + ' después'"
-            class="w-full rounded-lg object-cover"
-          />
-        </div>
-      </div>
-    </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div v-for="(item, index) in portfolio" :key="index" class="rounded-lg overflow-hidden">
+          <p class="text-white font-bold text-lg tracking-widest uppercase mb-3">{{ item.label }}</p>
+          <div
+            class="relative h-64 select-none overflow-hidden rounded-lg cursor-col-resize"
+            @mousedown="startDrag($event, index)"
+            @mousemove="onDrag($event, index)"
+            @mouseup="stopDrag"
+            @mouseleave="stopDrag"
+            @touchstart="startDragTouch($event, index)"
+            @touchmove="onDragTouch($event, index)"
+            @touchend="stopDrag"
+          >
+            <!-- After (fondo) -->
+            <img :src="item.after" class="absolute inset-0 w-full h-full object-cover" />
 
-    <!-- Modal Before/After -->
-    <div
-      v-if="modalOpen"
-      class="fixed inset-0 bg-black bg-opacity-95 z-50 flex items-center justify-center px-4"
-      @click.self="closeModal"
-    >
-      <div class="w-full max-w-5xl">
-        <div class="flex items-center justify-between mb-6">
-          <h3 class="text-white font-bold text-2xl tracking-widest uppercase">{{ portfolio[activeIndex].label }}</h3>
-          <button @click="closeModal" class="text-white text-3xl hover:text-[#cc2222] transition-colors">✕</button>
-        </div>
+            <!-- Before (recortado) -->
+            <div class="absolute inset-0 overflow-hidden" :style="{ width: sliders[index] + '%' }">
+              <img :src="item.before" class="absolute inset-0 w-full h-full object-cover" :style="{ width: (100 / sliders[index]) * 100 + '%', maxWidth: 'none' }" />
+            </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div>
-            <p class="text-[#cc2222] text-xs font-semibold tracking-[4px] uppercase mb-2">Antes</p>
-            <video
-              autoplay muted loop playsinline controls
-              class="w-full rounded-lg"
-              :src="portfolio[activeIndex].before"
-            ></video>
-          </div>
-          <div>
-            <p class="text-[#cc2222] text-xs font-semibold tracking-[4px] uppercase mb-2">Después</p>
-            <video
-              autoplay muted loop playsinline controls
-              class="w-full rounded-lg"
-              :src="portfolio[activeIndex].after"
-            ></video>
+            <!-- Línea divisora -->
+            <div class="absolute top-0 bottom-0 w-0.5 bg-white shadow-lg" :style="{ left: sliders[index] + '%' }">
+              <div class="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-lg">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0d0d0d" stroke-width="2.5">
+                  <path d="M9 18l-6-6 6-6M15 6l6 6-6 6"/>
+                </svg>
+              </div>
+            </div>
+
+            <!-- Labels -->
+            <span class="absolute top-3 left-3 text-xs font-bold tracking-widest uppercase bg-black bg-opacity-60 text-white px-2 py-1 rounded">Antes</span>
+            <span class="absolute top-3 right-3 text-xs font-bold tracking-widest uppercase bg-[#cc2222] text-white px-2 py-1 rounded">Después</span>
           </div>
         </div>
       </div>
@@ -68,34 +53,39 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 gsap.registerPlugin(ScrollTrigger)
 
 const portfolio = [
-  {
-    label: 'Mercedes',
-    thumbnail: 'https://res.cloudinary.com/dpi6oudmk/video/upload/v1778309182/Mercedes_Before_pff3tp.jpg',
-    thumbnailAfter: 'https://res.cloudinary.com/dpi6oudmk/video/upload/v1778309901/Mercedes_After_ovz8pf.jpg',
-  },
-  {
-    label: 'Ford',
-    thumbnail: 'https://res.cloudinary.com/dpi6oudmk/video/upload/v1778309177/Ford_Before_k1hz4n.jpg',
-    thumbnailAfter: 'https://res.cloudinary.com/dpi6oudmk/video/upload/v1778309113/Ford_After_jw0z5u.jpg',
-  },
-  {
-    label: 'Toyota',
-    thumbnail: 'https://res.cloudinary.com/dpi6oudmk/video/upload/v1778310192/LC_Before_mvu1ef.jpg',
-    thumbnailAfter: 'https://res.cloudinary.com/dpi6oudmk/video/upload/v1778309150/LC_After_cuvqq3.jpg',
-  },
+  { label: 'Corsa', before: '/gallery/Corsa-Dirty.png', after: '/gallery/Corsa-Clean.png' },
+  { label: 'RAV4', before: '/gallery/RAV-Dirty.png', after: '/gallery/RAV-Clean.png' },
+  { label: 'Corolla', before: '/gallery/Corolla-Dirty.png', after: '/gallery/Corolla-Clean.png' },
 ]
 
-const modalOpen = ref(false)
-const activeIndex = ref(0)
+const sliders = ref([50, 50, 50])
+const dragging = ref(null)
 const header = ref(null)
 
-const openModal = (index) => {
-  activeIndex.value = index
-  modalOpen.value = true
+const startDrag = (e, index) => {
+  dragging.value = index
 }
 
-const closeModal = () => {
-  modalOpen.value = false
+const onDrag = (e, index) => {
+  if (dragging.value !== index) return
+  const rect = e.currentTarget.getBoundingClientRect()
+  const x = Math.max(0, Math.min(e.clientX - rect.left, rect.width))
+  sliders.value[index] = (x / rect.width) * 100
+}
+
+const stopDrag = () => {
+  dragging.value = null
+}
+
+const startDragTouch = (e, index) => {
+  dragging.value = index
+}
+
+const onDragTouch = (e, index) => {
+  if (dragging.value !== index) return
+  const rect = e.currentTarget.getBoundingClientRect()
+  const x = Math.max(0, Math.min(e.touches[0].clientX - rect.left, rect.width))
+  sliders.value[index] = (x / rect.width) * 100
 }
 
 onMounted(() => {
