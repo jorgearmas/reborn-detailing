@@ -1,9 +1,9 @@
 <template>
-  <section id="servicios" class="py-24 px-6">
+  <section id="servicios" class="py-24 px-6 bg-white">
     <div class="max-w-6xl mx-auto">
       <div ref="header" class="text-center mb-16 opacity-0">
         <!-- <p class="text-[#cc2222] text-sm font-semibold tracking-[4px] uppercase mb-4">Lo que hacemos</p> -->
-        <h2 class="text-4xl md:text-5xl font-bold text-white">Servicios</h2>
+        <h2 class="text-4xl md:text-5xl font-bold text-[#0d0d0d]">Servicios</h2>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">

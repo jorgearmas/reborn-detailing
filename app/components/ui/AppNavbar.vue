@@ -2,29 +2,27 @@
   <nav class="fixed top-0 left-0 w-full z-50 py-5 px-4">
     <div class="mx-auto flex items-center justify-between relative">
 
-      <!-- Menú rueda esquina izquierda -->
+      <!-- Menú hamburguesa esquina izquierda -->
       <div class="relative">
         <button @click="menuOpen = !menuOpen" class="flex items-center justify-center w-10 h-10 rounded-full bg-[#1a1a1a] border border-[#2a2a2a] hover:border-[#cc2222] transition-all duration-300">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f0f0f0" stroke-width="1.5">
-            <circle cx="12" cy="12" r="10"/>
-            <circle cx="12" cy="12" r="3"/>
-            <line x1="12" y1="2" x2="12" y2="6"/>
-            <line x1="12" y1="18" x2="12" y2="22"/>
-            <line x1="2" y1="12" x2="6" y2="12"/>
-            <line x1="18" y1="12" x2="22" y2="12"/>
-            <line x1="4.93" y1="4.93" x2="7.76" y2="7.76"/>
-            <line x1="16.24" y1="16.24" x2="19.07" y2="19.07"/>
-            <line x1="4.93" y1="19.07" x2="7.76" y2="16.24"/>
-            <line x1="16.24" y1="7.76" x2="19.07" y2="4.93"/>
+          <svg width="18" height="14" viewBox="0 0 18 14" fill="none">
+            <line x1="0" y1="1" x2="18" y2="1" stroke="#f0f0f0" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="0" y1="7" x2="18" y2="7" stroke="#f0f0f0" stroke-width="1.5" stroke-linecap="round"/>
+            <line x1="0" y1="13" x2="18" y2="13" stroke="#f0f0f0" stroke-width="1.5" stroke-linecap="round"/>
           </svg>
         </button>
 
         <transition name="fade">
           <ul v-if="menuOpen" class="absolute top-14 left-0 bg-[#1a1a1a] border border-[#2a2a2a] rounded-2xl py-3 w-48 text-xs font-semibold tracking-[2px] uppercase text-[#f0f0f0] shadow-xl">
-            <li><a href="#servicios" @click="menuOpen = false" class="block px-6 py-3 hover:text-[#cc2222] hover:bg-[#0d0d0d] transition-all duration-200">Servicios</a></li>
-            <li><a href="#galeria" @click="menuOpen = false" class="block px-6 py-3 hover:text-[#cc2222] hover:bg-[#0d0d0d] transition-all duration-200">Galería</a></li>
-            <li><a href="#nosotros" @click="menuOpen = false" class="block px-6 py-3 hover:text-[#cc2222] hover:bg-[#0d0d0d] transition-all duration-200">Nosotros</a></li>
-            <li><a href="#contacto" @click="menuOpen = false" class="block px-6 py-3 text-[#cc2222] hover:bg-[#0d0d0d] transition-all duration-200">Contacto</a></li>
+            <li><a href="/" @click="menuOpen = false" class="block px-6 py-3 text-[#cc2222] hover:bg-[#0d0d0d] transition-all duration-200">Inicio</a></li>
+            <template v-if="!minimal">
+              <li><a href="#servicios" @click="menuOpen = false" class="block px-6 py-3 hover:text-[#cc2222] hover:bg-[#0d0d0d] transition-all duration-200">Servicios</a></li>
+              <li><a href="#galeria" @click="menuOpen = false" class="block px-6 py-3 hover:text-[#cc2222] hover:bg-[#0d0d0d] transition-all duration-200">Galería</a></li>
+              <li><a href="#nosotros" @click="menuOpen = false" class="block px-6 py-3 hover:text-[#cc2222] hover:bg-[#0d0d0d] transition-all duration-200">Nosotros</a></li>
+              <li><a href="/paquetes" @click="menuOpen = false" class="block px-6 py-3 hover:text-[#cc2222] hover:bg-[#0d0d0d] transition-all duration-200">Paquetes</a></li>
+              <li><a href="/precios" @click="menuOpen = false" class="block px-6 py-3 hover:text-[#cc2222] hover:bg-[#0d0d0d] transition-all duration-200">Precios</a></li>
+              <li><a href="#contacto" @click="menuOpen = false" class="block px-6 py-3 hover:text-[#cc2222] hover:bg-[#0d0d0d] transition-all duration-200">Contacto</a></li>
+            </template>
           </ul>
         </transition>
       </div>
@@ -36,21 +34,12 @@
         </a>
       </transition>
 
-      <!-- Casita derecha — aparece al hacer scroll -->
-      <transition name="fade">
-        <a v-if="scrolled" href="/" class="flex items-center justify-center w-10 h-10 rounded-full bg-[#1a1a1a] border border-[#2a2a2a] hover:border-[#cc2222] transition-all duration-300">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f0f0f0" stroke-width="1.5">
-            <path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/>
-            <path d="M9 21V12h6v9"/>
-          </svg>
-        </a>
-      </transition>
-
     </div>
   </nav>
 </template>
 
 <script setup>
+const props = defineProps({ minimal: { type: Boolean, default: false } })
 const menuOpen = ref(false)
 const scrolled = ref(false)
 

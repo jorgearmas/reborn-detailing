@@ -7,7 +7,7 @@
       playsinline
       class="absolute inset-0 w-full h-full object-cover"
     >
-      <source src="https://res.cloudinary.com/dpi6oudmk/video/upload/v1778252977/hero-new_fc46bm.mp4" type="video/mp4" />
+      <source src="https://res.cloudinary.com/dpi6oudmk/video/upload/q_auto/f_auto/v1778252977/hero-new_fc46bm.mp4" type="video/mp4" />
 </video>
     <div class="absolute inset-0 bg-gradient-to-t from-[#0d0d0d] via-transparent to-transparent"></div>
     
@@ -18,6 +18,9 @@
       </h1>
       <a href="#servicios" class="inline-flex items-center gap-3 text-white text-sm font-semibold tracking-widest uppercase border-b border-white pb-1 hover:border-[#cc2222] hover:text-[#cc2222] transition-all duration-300">
         Ver servicios <span>→</span>
+      </a>
+      <a href="#contacto" class="block mt-4 text-[#888888] text-xs tracking-widest uppercase hover:text-white transition-colors duration-300">
+        Cotiza ahora →
       </a>
     </div>
   </section>

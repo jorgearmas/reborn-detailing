@@ -2,7 +2,7 @@
   <section id="galeria" class="py-24 px-6 bg-[#0d0d0d]">
     <div class="max-w-6xl mx-auto">
       <div ref="header" class="text-center mb-16">
-        <p class="text-[#cc2222] text-sm font-semibold tracking-[4px] uppercase mb-4">Nuestro trabajo</p>
+        <!-- <p class="text-[#cc2222] text-sm font-semibold tracking-[4px] uppercase mb-4">Nuestro trabajo</p> -->
         <h2 class="text-4xl md:text-5xl font-bold text-white">Portafolio</h2>
       </div>
 
@@ -10,7 +10,7 @@
         <div v-for="(item, index) in portfolio" :key="index" class="rounded-lg overflow-hidden">
           <p class="text-white font-bold text-lg tracking-widest uppercase mb-3">{{ item.label }}</p>
           <div
-            class="relative h-96 select-none overflow-hidden rounded-lg cursor-col-resize"
+            class="relative h-96 select-none overflow-hidden rounded-lg cursor-col-resize touch-none"
             @mousedown="startDrag($event, index)"
             @mousemove="onDrag($event, index)"
             @mouseup="stopDrag"
@@ -20,11 +20,11 @@
             @touchend="stopDrag"
           >
             <!-- After (fondo) -->
-            <img :src="item.after" class="absolute inset-0 w-full h-full object-cover" />
+            <img :src="item.after" loading="lazy" class="absolute inset-0 w-full h-full object-cover" />
 
             <!-- Before (recortado) -->
             <div class="absolute inset-0 overflow-hidden" :style="{ width: sliders[index] + '%' }">
-              <img :src="item.before" class="absolute inset-0 w-full h-full object-cover" :style="{ width: (100 / sliders[index]) * 100 + '%', maxWidth: 'none' }" />
+              <img :src="item.before" loading="lazy" class="absolute inset-0 w-full h-full object-cover" :style="{ width: (100 / sliders[index]) * 100 + '%', maxWidth: 'none' }" />
             </div>
 
             <!-- Línea divisora -->
@@ -59,7 +59,7 @@ const portfolio = [
   { label: 'BMW', before: '/gallery/BMW_good.jpg', after: '/gallery/BMW_bad.jpg' },
 ]
 
-const sliders = ref([50, 50, 50])
+const sliders = ref([50, 50, 50, 50])
 const dragging = ref(null)
 const header = ref(null)
 

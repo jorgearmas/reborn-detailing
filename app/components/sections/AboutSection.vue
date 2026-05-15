@@ -1,23 +1,21 @@
 <template>
   <section id="nosotros" class="py-24 px-6 bg-white">
-    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-      <div ref="text">
-        <p class="text-[#cc2222] text-sm font-semibold tracking-[4px] uppercase mb-4">Quiénes somos</p>
-        <h2 class="text-4xl md:text-5xl font-bold text-white mb-6">Pasión por<br /><span class="text-[#cc2222]">los detalles</span></h2>
-        <p class="text-[#888888] leading-relaxed mb-4">
-          Reborn Detailing Studio nació de la pasión por los autos y la obsesión por el detalle. Cada vehículo que entra a nuestro taller recibe un tratamiento personalizado con los mejores productos del mercado.
-        </p>
-        <p class="text-[#888888] leading-relaxed">
-          Nuestro equipo cuenta con años de experiencia en detailing profesional, wrap y restauración de iluminación. No solo limpiamos autos — los transformamos.
+    <div class="max-w-6xl mx-auto">
+
+      <div ref="text" class="text-center mb-16">
+        <!-- <p class="text-[#cc2222] text-sm font-semibold tracking-[4px] uppercase mb-4">Quiénes somos</p> -->
+        <h2 class="text-4xl md:text-5xl font-bold text-[#0d0d0d] mb-6">Pasión por <span class="text-[#cc2222]">los detalles</span></h2>
+        <p class="text-[#888888] leading-relaxed max-w-2xl mx-auto">
+          Nuestro equipo está formado por profesionales con años de experiencia en detailing, corrección de pintura y protección vehicular. Cada trabajo es tratado con la misma exigencia y dedicación, sin importar el vehículo. Nos apasiona lo que hacemos — y se nota en cada resultado.
         </p>
       </div>
 
-      <div ref="image" class="relative">
-        <div class="border border-[#2a2a2a] rounded-lg overflow-hidden">
-          <img src="/rebornlogo.png" alt="Reborn Detailing Studio" class="w-full object-cover" />
+      <div ref="team" class="grid grid-cols-3 gap-6">
+        <div v-for="member in members" :key="member.src" class="overflow-hidden rounded-lg">
+          <img :src="member.src" :alt="member.name" loading="lazy" class="w-full h-80 object-cover object-top" />
         </div>
-        <div class="absolute -bottom-4 -left-4 border border-[#cc2222] rounded-lg w-full h-full -z-10"></div>
       </div>
+
     </div>
   </section>
 </template>
@@ -29,17 +27,23 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 gsap.registerPlugin(ScrollTrigger)
 
 const text = ref(null)
-const image = ref(null)
+const team = ref(null)
+
+const members = [
+  { src: '/gallery/daniel.png', name: 'Daniel' },
+  { src: '/gallery/rafael.png', name: 'Rafael' },
+  { src: '/gallery/ivan.png',   name: 'Ivan' },
+]
 
 onMounted(() => {
   gsap.from(text.value, {
-    opacity: 0, x: -40, duration: 0.9,
+    opacity: 0, y: 30, duration: 0.9,
     scrollTrigger: { trigger: text.value, start: 'top 80%' }
   })
 
-  gsap.from(image.value, {
-    opacity: 0, x: 40, duration: 0.9,
-    scrollTrigger: { trigger: image.value, start: 'top 80%' }
+  gsap.from(team.value.children, {
+    opacity: 0, y: 40, duration: 0.7, stagger: 0.15,
+    scrollTrigger: { trigger: team.value, start: 'top 80%' }
   })
 })
 </script>
